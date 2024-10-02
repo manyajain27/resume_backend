@@ -1,5 +1,10 @@
 from django.db import models
 
+
+class PDFFile(models.Model):
+    file = models.FileField(upload_to='pdfs/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
 # Model for storing personal details
 class PersonalDetail(models.Model):
     name = models.CharField(max_length=255)
@@ -14,11 +19,11 @@ class PersonalDetail(models.Model):
 # Model for storing work experience
 class WorkExperience(models.Model):
     personal_detail = models.ForeignKey(PersonalDetail, related_name='work_experience', on_delete=models.CASCADE)
-    company = models.CharField(max_length=255)
+    company = models.CharField(max_length=255,blank=True,null=True)
     start_date = models.CharField(max_length=20, blank=True, null=True)  # Accepting as string (e.g., 'Aug 2022')
     end_date = models.CharField(max_length=20, blank=True, null=True)    # Accepting as string (e.g., 'Present')
-    position = models.CharField(max_length=255)
-    location = models.CharField(max_length=255)
+    position = models.CharField(max_length=255,blank=True,null=True)
+    location = models.CharField(max_length=255,blank=True,null=True)
     description = models.TextField(blank=True, null=True)  # Store multi-line descriptions
 
     def __str__(self):
@@ -27,11 +32,11 @@ class WorkExperience(models.Model):
 # Model for storing education details
 class Education(models.Model):
     personal_detail = models.ForeignKey(PersonalDetail, related_name='education', on_delete=models.CASCADE)
-    university = models.CharField(max_length=255)
+    university = models.CharField(max_length=255,blank=True,null=True)
     start_date = models.CharField(max_length=20, blank=True, null=True)  # Accepting as string (e.g., 'Sep 2018')
     end_date = models.CharField(max_length=20, blank=True, null=True)    # Accepting as string (e.g., 'May 2022')
-    degree = models.CharField(max_length=255)
-    location = models.CharField(max_length=255)
+    degree = models.CharField(max_length=255,blank=True,null=True)
+    location = models.CharField(max_length=255,blank=True,null=True)
     description = models.TextField(blank=True, null=True)  # Store multi-line descriptions
 
     def __str__(self):

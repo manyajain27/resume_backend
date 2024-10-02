@@ -1,6 +1,13 @@
 from rest_framework import serializers
 from .models import PersonalDetail, WorkExperience, Education, Skill, Interest
 
+from .models import PDFFile
+
+class PDFFileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PDFFile
+        fields = ['file']
+        
 class WorkExperienceSerializer(serializers.ModelSerializer):
     description = serializers.ListField(child=serializers.CharField())
 
