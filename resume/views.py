@@ -1,7 +1,7 @@
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view,permission_classes
 from rest_framework.response import Response
 from rest_framework import status, viewsets
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from .models import PersonalDetail, PDFFile  # Import your model
 from .serializers import PersonalDetailSerializer  # Import your serializer
 from .serializers import PDFFileSerializer  # Import your serializer
@@ -16,6 +16,9 @@ from PIL import Image
 
 # Set the Tesseract-OCR executable path
 tess.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+
+
+
 
 class PersonalDetailViewSet(viewsets.ModelViewSet):
     queryset = PersonalDetail.objects.all()
